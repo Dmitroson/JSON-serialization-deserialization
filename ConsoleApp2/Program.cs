@@ -1,4 +1,5 @@
 ﻿using ConsoleApp2;
+using ConsoleApp2.Core.Business;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceAndJSON
 {
-    namespace JSONandInterface
+    namespace JsonInterface
     {
         public class Program
         {
@@ -15,12 +16,10 @@ namespace InterfaceAndJSON
 
             static void Main(string[] args)
             {
-                //var storageProvider = new StorageProvider(Source);
-                //var reader = storageProvider.CreateReader();
-                //Console.WriteLine(reader.GetAll());
+                IStorageProvider storageProvider = new StorageProvider(Source);
+                IHotelsManager manager = new HotelsManager(storageProvider);
 
-                //var manager = new Manager();
-                //manager.GetAll();
+                var result = manager.GetHotelById(13);
             }
         }
     }

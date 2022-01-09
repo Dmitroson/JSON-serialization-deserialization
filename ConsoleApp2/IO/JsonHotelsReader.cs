@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ConsoleApp2.IO
@@ -25,14 +26,23 @@ namespace ConsoleApp2.IO
             var hotels = JsonConvert.DeserializeObject<List<Hotel>>(jsonString);
 
             if (hotels == null)
-                return new List<Hotel>();
-            
+                throw new Exception("File is invalid.");
+
             return hotels;
         }
 
         public Hotel GetById(int id)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(SourcePath))
+                throw new Exception("File not found.");
+
+            string jsonString = File.ReadAllText(SourcePath);
+            var hotels = JsonConvert.DeserializeObject<List<Hotel>>(jsonString);
+
+            if (hotels == null)
+                throw new Exception("File is invalid.");
+
+            return hotels.FirstOrDefault(h => h.HotelId == id);
         }
     }
 }

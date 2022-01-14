@@ -12,5 +12,7 @@ namespace ConsoleApp2.Core.Business
         void AddHotel(Hotel hotel);
 
         List<Hotel> GetTopHotels();
+
+        //
     }
 }
